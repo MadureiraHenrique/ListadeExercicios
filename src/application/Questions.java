@@ -3,44 +3,43 @@ package application;
 import java.util.Scanner;
 import java.util.Locale;
 
-// 7) Faça um programa em Java que receba três valores inteiros referentes ao tamanho dos três lados de um
-// triângulo. Para formar um triângulo cada lado deve ser menor do que a soma dos outros dois lados. Uma vez
-// verificado que os valores estão corretos (ou seja, formam um triângulo) o programa deve classifica-lo em
+// 8) A escola “APRENDER” faz o pagamento de seus professores por hora/aula. Faça um programa em Java que
+// receba o enquadramento do professor e a quantidade de horas trabalhadas, calcule e exiba o salário do
+// professor. Sabe-se que o valor da hora/aula segue a tabela abaixo:
 
 public class Questions {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in).useLocale(Locale.US);
+        System.out.print("Qual o seu Nivel? ");
+        int nivel = scan.nextInt();
 
-        double[] lados = new double[3];
+        System.out.print("\nQuantas Horas Trabalhas? ");
+        int horas = scan.nextInt();
 
-        System.out.println("Veracidade de Triangulos");
-        for (int i = 0; i < 3; i++) {
-            System.out.print("Lado " + (i + 1) + ": ");
-            lados[i] = scan.nextInt();
-            System.out.println();
-        }
-
-        if ((lados[0] + lados[1]) > lados[2]
-                || (lados[1] + lados[2]) > lados[0]
-                || (lados[2] + lados[0]) > lados[1]) {
-            System.out.println(triangulo(lados));
-        } else {
-            System.out.println("Não é um Triângulo");
-        }
+        System.out.println("\nValor Total: " + valorTotal(horas, enquadramento(nivel)));
 
         scan.close();
     }
 
-    // equilátero (todos os lados iguais), isósceles (dois lados iguais), escaleno
-    // (todos os lados diferentes).
-    public static String triangulo(double[] lado) {
-        if (lado[0] == lado[1] && lado[0] == lado[2]) {
-            return ("É um Triângulo Equilatero!");
-        } else if (lado[0] == lado[1] || lado[1] == lado[2] || lado[0] == lado[2]) {
-            return ("É um Triângulo Isósceles!");
+    // Enquadramento Valor da hora/aula
+    // Nível 1 R$12,00
+    // Nível 2 R$17,00
+    // Nível 3 R$25,00
+    public static int enquadramento(int nivel) {
+        if (nivel == 1) {
+            return (12);
+        } else if (nivel == 2) {
+            return (17);
+        } else if (nivel == 3) {
+            return (25);
         } else {
-            return ("É um Triângulo Escaleno!");
+            System.out.println("Nivel Inválido");
+            return (0);
         }
+    }
+
+    public static double valorTotal(int horasTrabalhadas, int valorNivel) {
+        return horasTrabalhadas * valorNivel;
     }
 
 }
